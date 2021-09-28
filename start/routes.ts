@@ -23,3 +23,9 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.get('/', async () => {
   return { hello: 'world' }
 })
+
+Route.get('/projects', "ProjectsController.index"); // 목록
+Route.post('projects', "ProjectsController.store");   // 신규 생성
+Route.get('projects/:id', "ProjectsController.show");    // 개별 조회
+Route.patch('projects/:id', "ProjectsController.update");    // 개별 수정
+Route.delete('projects/:id', "ProjectsController.destory");   // 게뱔 삭제
