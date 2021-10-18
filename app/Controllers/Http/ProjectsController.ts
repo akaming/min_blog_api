@@ -2,33 +2,34 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Project from "App/Models/Project";
 
 export default class ProjectsController {
-    // 목록
+    // 전체 목록
     public async index ({}: HttpContextContract) {
       const projects = await Project.all();
       return projects;
     }
 
-    // 개별 생성
-    public async store ({}: HttpContextContract) {
+    // project data 생성
+    public async store ({request}: HttpContextContract) {
+      const data = request.only(['title', 'imageSrc', 'content', 'link']);;
+
       const project = new Project();
-      project.title = "제목";
-      project.imageSrc = "이미지";
-      project.content = "본문";
-      project.link = "url";
+      project.merge(data);
+
       await project.save();
 
       return project;
     }
 
-    // 개별 조회
+    // project data 조회
     public async show ({}: HttpContextContract) {
+
     }
 
-    // 개별 수정
+    // project data 수정
     public async update ({}: HttpContextContract) {
     }
 
-    // 개별 삭제
+    // project data 삭제
     public async destroy ({}: HttpContextContract) {
     }
 }
