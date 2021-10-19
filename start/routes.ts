@@ -29,3 +29,4 @@ Route.post('projects', "ProjectsController.store");   // 신규 생성
 Route.get('projects/:id', "ProjectsController.show");    // 개별 조회
 Route.patch('projects/:id', "ProjectsController.update");    // 개별 수정
 Route.delete('projects/:id', "ProjectsController.destory");   // 게뱔 삭제
+Route.post('sign-in', "AuthController.signIn");
