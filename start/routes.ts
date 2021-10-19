@@ -24,9 +24,12 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route.get('/projects', "ProjectsController.index"); // 목록
-Route.post('projects', "ProjectsController.store");   // 신규 생성
-Route.get('projects/:id', "ProjectsController.show");    // 개별 조회
-Route.patch('projects/:id', "ProjectsController.update");    // 개별 수정
-Route.delete('projects/:id', "ProjectsController.destory");   // 게뱔 삭제
+Route.get('/projects', "ProjectsController.index"); // 전체 목록
 Route.post('sign-in', "AuthController.signIn");
+
+Route.group(()=> {
+  Route.post('projects', "ProjectsController.store");   // project data 생성
+  Route.get('projects/:id', "ProjectsController.show");    // project data 조회
+  Route.patch('projects/:id', "ProjectsController.update");    // project data 수정
+  Route.delete('projects/:id', "ProjectsController.destory");   // project data 삭제
+}).middleware('auth');
