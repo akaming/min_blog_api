@@ -6,15 +6,18 @@ import {
   BaseModel,
 } from '@ioc:Adonis/Lucid/Orm'
 
-export default class users extends BaseModel {
+export default class Users extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public email: string
+  public userId: string
 
   @column({ serializeAs: null })
   public password: string
+
+  @column()
+  public name: string
 
   @column()
   public rememberMeToken?: string
@@ -26,7 +29,7 @@ export default class users extends BaseModel {
   public updatedAt: DateTime
 
   @beforeSave()
-  public static async hashPassword (users: users) {
+  public static async hashPassword (users: Users) {
     if (users.$dirty.password) {
       users.password = await Hash.make(users.password)
     }
