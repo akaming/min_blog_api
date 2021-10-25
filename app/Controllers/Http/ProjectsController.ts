@@ -22,8 +22,8 @@ export default class ProjectsController {
     }
 
     // project data 조회
-    public async show ({}: HttpContextContract) {
-
+    public async show ({params}: HttpContextContract) {
+      return await Project.query().where('id', params.id).firstOrFail();
     }
 
     // project data 수정
