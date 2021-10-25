@@ -31,5 +31,5 @@ Route.get('/projects/:id', "ProjectsController.show");    // project data 조회
 Route.group(()=> {
   Route.post('/projects', "ProjectsController.store");   // project data 생성
   Route.patch('/projects/:id', "ProjectsController.update");    // project data 수정
-  Route.delete('/projects/:id', "ProjectsController.destory");   // project data 삭제
+  Route.delete('/projects/:id', "ProjectsController.destroy");   // project data 삭제
 }).middleware('auth');

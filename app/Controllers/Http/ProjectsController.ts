@@ -28,9 +28,12 @@ export default class ProjectsController {
 
     // project data 수정
     public async update ({}: HttpContextContract) {
+
     }
 
     // project data 삭제
-    public async destroy ({}: HttpContextContract) {
+    public async destroy ({ auth, params }: HttpContextContract) {
+      await Project.query().where('user_id', auth.user!.id).where('id', params.id).delete();
+      return 'ok';
     }
 }
