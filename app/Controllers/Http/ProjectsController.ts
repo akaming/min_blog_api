@@ -27,8 +27,25 @@ export default class ProjectsController {
     }
 
     // project data 수정
-    public async update ({}: HttpContextContract) {
+    public async update ({ auth, params, request, response }: HttpContextContract) {
+      const project: Project = await Project.query().where('user_id', auth.user!.id).where('id', params.id).firstOrFail();
+      const title = request.input('title');
+      const imageSrc = request.input('imageSrc');
+      const content = request.input('content');
+      const link = request.input('link');
 
+      if (project.userId !== auth.user!.id) {
+        response.statue(403); // 권한 없음 에러 403
+        return { message: '수정할 권한이 없습니다.' };
+      }
+
+      project.title = title;
+      project.imageSrc = imageSrc;
+      project.content = content;
+      project.link = link;
+
+      await project.save(); //저장
+      return project;
     }
 
     // project data 삭제
