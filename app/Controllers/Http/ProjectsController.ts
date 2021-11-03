@@ -35,7 +35,7 @@ export default class ProjectsController {
       const link = request.input('link');
 
       if (project.userId !== auth.user!.id) {
-        response.statue(403); // 권한 없음 에러 403
+        response.status(403); // 권한 없음 에러 403
         return { message: '수정할 권한이 없습니다.' };
       }
 
